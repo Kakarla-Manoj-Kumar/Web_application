@@ -1,0 +1,63 @@
+
+----------
+HTML Form:
+
+<!DOCTYPE html>
+<html>
+<body>
+   <form action="add">                                                             <!-- Form with action attribute set to "add", which specifies the URL to submit the form data to -->
+    Enter 1st number : <input type ="text" name ="num1"><br>  <!-- Text input field for the first number with name attribute "num1" -->
+    Enter 2nd number : <input type ="text" name ="num2"><br> <!-- Text input field for the second number with name attribute "num2" -->
+    <input type ="submit">                                                         <!-- Submit button to submit the form -->
+   </form>
+</body>
+</html>
+
+
+This HTML form contains two input fields for entering two numbers and a submit button. When the form is submitted, it sends a request to the "add" URL along with the entered numbers.
+--------------------
+Servlet Class:
+
+package com.Kakarla;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class Test extends HttpServlet {                                                                                         // Test class extending HttpServlet for servlet functionality
+	
+	public void service(HttpServletRequest req, HttpServletResponse res) throws IOException {
+		int i = Integer.parseInt(req.getParameter("num1"));                                                        // Retrieving the value of 'num1' parameter from the request and parsing it to an integer
+		int j = Integer.parseInt(req.getParameter("num2"));                                                        // Retrieving the value of 'num2' parameter from the request and parsing it to an integer
+		
+		int k = i + j;                                                                                                                 // Adding the two numbers obtained from the request
+		
+		PrintWriter out = res.getWriter();                                                                                 // Getting PrintWriter object from HttpServletResponse to send output to the client
+		out.println(k + " ");                                                                                                      // Sending the result of addition to the client
+	}
+}
+
+
+This servlet class Test extends HttpServlet and overrides the service method to handle HTTP requests. It retrieves the values of the parameters "num1" and "num2" from the request, converts them to integers, performs addition, and sends the result back to the client.
+
+-----------------------
+web.xml Configuration File:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+
+	<servlet>                                                                                      <!-- Configuring servlet -->
+	    <servlet-name>abc</servlet-name>                                          <!-- Name of the servlet -->
+	    <servlet-class>com.Kakarla.Test</servlet-class>                      <!-- Fully qualified class name of the servlet -->
+	</servlet>
+	<servlet-mapping>                                                                       <!-- Mapping servlet to URL pattern -->
+		<servlet-name>abc</servlet-name>                                      <!-- Name of the servlet to be mapped -->
+		<url-pattern>/add</url-pattern>                                            <!-- URL pattern to which the servlet is mapped -->
+	</servlet-mapping>
+</web-app>
+
+
+This XML file is the web.xml deployment descriptor where servlet mapping is defined. It maps the servlet Test to the URL pattern /add, so when the form is submitted, the request is directed to this servlet for processing.
