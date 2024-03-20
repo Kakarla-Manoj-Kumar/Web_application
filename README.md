@@ -22,9 +22,21 @@ Deployment Descriptor (web.xml):
 The web.xml file serves as the deployment descriptor for the web application.
 It defines a servlet named "abc" and maps it to the servlet class com.Kakarla.Test.
 The servlet is mapped to the URL pattern "/add", meaning that any requests matching this pattern will be handled by the servlet.
-
-
-
+..........................................................................................................................................
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.........................................................................................................................................
 
 #How to call Servlet from Servlet
 
@@ -56,6 +68,8 @@ web.xml:
 This file is the deployment descriptor for the web application.
 It configures the servlets (TestServlet and TestServlet_2) and their URL mappings.
 Defines servlet-name, servlet-class, and URL patterns for each servlet.
+
+
 Overall, this application demonstrates the basic usage of servlets to handle user input, 
 perform calculations, and generate dynamic responses. The HTML form collects user input, which is then processed 
 by servlets to perform mathematical operations, and the results are displayed back to the user.
