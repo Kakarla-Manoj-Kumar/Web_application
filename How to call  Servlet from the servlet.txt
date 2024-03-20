@@ -1,0 +1,91 @@
+How to call  Servlet from the servlet ?
+
+// HTML form for inputting two numbers
+
+<!DOCTYPE html>
+<html>
+<body>
+<form action="mult">
+     Enter 1st Number : <input type="text" name="value1"><br>          <!-- Input field for the first number -->
+     Enter 2nd Number : <input type= "text" name="value2"><br>       <!-- Input field for the second number -->
+     <input type= "submit">                                                                <!-- Submit button to send the form data to the server -->
+</form>
+</body>
+</html>
+-----------------------------------------------------
+// First Servlet: Handles multiplication
+
+package com.Kakarla;
+
+import java.io.IOException;                                                                // Importing IOException class for handling I/O exceptions
+import java.io.PrintWriter;                                                                  // Importing PrintWriter class for writing response data
+import jakarta.servlet.RequestDispatcher;                                            // Importing RequestDispatcher class for request forwarding
+import jakarta.servlet.ServletException;                                              // Importing ServletException class for servlet exceptions
+import jakarta.servlet.http.HttpServlet;                                                // Importing HttpServlet class for creating servlets
+import jakarta.servlet.http.HttpServletRequest;                                    // Importing HttpServletRequest class for handling HTTP requests
+import jakarta.servlet.http.HttpServletResponse;                                 // Importing HttpServletResponse class for handling HTTP responses
+
+public class TestServlet extends HttpServlet                                       // Declaring TestServlet class extending HttpServlet
+{
+    public void service(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+        int i=Integer.parseInt(req.getParameter("value1"));                     // Parsing and retrieving the value of the first number from the request
+        int j=Integer.parseInt(req.getParameter("value2"));                     // Parsing and retrieving the value of the second number from the request
+        
+        int k =i*j;                                                                                 // Calculating the product of the two numbers
+        
+        req.setAttribute("k", k);                                                            // Setting the calculated result as an attribute in the request
+        
+        RequestDispatcher rd = req.getRequestDispatcher("sqr");          // Creating a request dispatcher for forwarding the request
+        rd.forward(req, res);                                                                // Forwarding the request to another servlet for further processing
+    }
+}
+-------------------------------------------------------
+// Second Servlet: Handles squaring
+package com.Kakarla;
+
+import java.io.IOException;                                                            // Importing IOException class for handling I/O exceptions
+import java.io.PrintWriter;                                                              // Importing PrintWriter class for writing response data
+import jakarta.servlet.http.HttpServlet;                                            // Importing HttpServlet class for creating servlets
+import jakarta.servlet.http.HttpServletRequest;                                // Importing HttpServletRequest class for handling HTTP requests
+import jakarta.servlet.http.HttpServletResponse;                             // Importing HttpServletResponse class for handling HTTP responses
+
+public class TestServlet_2 extends HttpServlet {                            // Declaring TestServlet_2 class extending HttpServlet
+    public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException {
+        int k=(int)req.getAttribute("k");                                              // Retrieving the attribute 'k' from the request, which holds the calculated product
+        
+        k=k*k;                                                                                 // Calculating the square of the product
+        
+        PrintWriter out = res.getWriter();                                          // Getting the PrintWriter object to write the response
+        out.println(k+" ");                                                                // Sending the squared product as the response
+    }
+}
+------------------------------------------------------------------------------------------
+// web.xml deployment descriptor: Configures servlets and mappings
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd" id="WebApp_ID" version="6.0">
+  
+  <!-- Servlet Configuration: Servlet TestServlet -->
+  <servlet>
+    <servlet-name>ab</servlet-name>                                  <!-- Name of the servlet -->
+    <servlet-class>com.Kakarla.TestServlet</servlet-class> <!-- Servlet class for handling the request -->
+  </servlet>
+  
+  <!-- Servlet Mapping: URL pattern for TestServlet -->
+  <servlet-mapping>
+    <servlet-name>ab</servlet-name>                                 <!-- Name of the servlet to map -->
+    <url-pattern>/mult</url-pattern>                                    <!-- URL pattern to access the servlet -->
+  </servlet-mapping>
+  
+  <!-- Servlet Configuration: Servlet TestServlet_2 -->
+  <servlet>
+    <servlet-name>b</servlet-name>                                      <!-- Name of the servlet -->
+    <servlet-class>com.Kakarla.TestServlet_2</servlet-class> <!-- Servlet class for handling the request -->
+  </servlet>
+  
+  <!-- Servlet Mapping: URL pattern for TestServlet_2 -->
+  <servlet-mapping>
+    <servlet-name>b</servlet-name>                                    <!-- Name of the servlet to map -->
+    <url-pattern>/sqr</url-pattern>                                       <!-- URL pattern to access the servlet -->
+  </servlet-mapping>
+  
+</web-app>

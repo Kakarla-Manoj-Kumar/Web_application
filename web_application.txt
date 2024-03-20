@@ -1,4 +1,26 @@
 
+
+
+To create a servlet we need 
+1 Server(tomcat)  (download tomcat zip server and zip source from chrome any recent version)
+1 html file    
+1 servelet file(java)
+1 web.xml file
+
+in sercice(req,res) method we are using  two objects.
+
+1). HttpServletRequest.(Request Object)
+2). HttpServletResponse.(Response Object)
+
+
+Client machine  ------> Servlet/Server
+in this case sending the request by client machine to the servlet by reqest object
+Client machine  <------ Servlet/Server
+in this case sending the response to the client machine from the servlet by response object
+
+Note: We not need to  create request,response objects, just we have to specify,  Tomcat server will provide for us.
+
+
 ----------
 HTML Form:
 
@@ -61,3 +83,5 @@ web.xml Configuration File:
 
 
 This XML file is the web.xml deployment descriptor where servlet mapping is defined. It maps the servlet Test to the URL pattern /add, so when the form is submitted, the request is directed to this servlet for processing.
+
+
