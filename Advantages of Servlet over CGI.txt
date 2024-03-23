@@ -18,3 +18,4 @@ Advantages of Servlet:
 2).Portability: because it uses Java language.
 3).Robust: JVM manages Servlets, so we don't need to worry about the memory leak, garbage collection, etc.
 4).Secure: because it uses java language.
+

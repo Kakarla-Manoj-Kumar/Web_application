@@ -1,0 +1,85 @@
+
+There are Three types Session Management:
+1)Session
+2)Cookie
+3)URL Rewriting
+ 
+
+ServletConfig and ServletContext
+--------------------------------------------
+
+ServletConfig and ServletContext are both interfaces in the Java Servlet API
+
+ServletConfig
+--------------------
+Note:if you have different value for different servlet good to go for Servlet Config.
+1).ServletConfig available in javax.servlet.*; package
+
+2).ServletConfig object is one per servlet class
+
+3).Object of ServletConfig will be created during initialization process of the servlet
+
+4).Scope: As long as a servlet is executing, ServletConfig object will be available, it will be destroyed once the servlet execution is completed.
+
+5).In web.xml – <init-param> tag will be appear under <servlet-class> tag
+
+<servlet>
+    <servlet-name>ServletConfigTest</servlet-name>
+    <servlet-class>com.stackoverflow.ServletConfigTest</servlet-class>
+    <init-param>
+        <param-name>topic</param-name>
+        <param-value>Difference between ServletConfig and ServletContext</param-value>
+    </init-param>
+</servlet>
+
+To get the Output from servlet filr we have to use  few objects and methods :
+{
+PrintWriter out = getWriter();
+out.Println("Hi");
+
+ServletConfig ctg = getServeletConfig();
+String str = ctg.getInitParameter("name");
+
+out.println(str);
+}
+
+ServletContext
+--------------------
+if you havc multiple servlets which will  have same value good to go for ServletContext
+1).ServletContext available in javax.servlet.*; package
+
+2).ServletContext object is global to entire web application
+
+3).Object of ServletContext will be created at the time of web application deployment
+
+4).Scope: As long as web application is executing, ServletContext object will be available, and it will be destroyed once the application is removed from the server.
+
+5).In web.xml – <context-param> tag will be appear under <web-app> tag
+
+<context-param>
+    <param-name>globalVariable</param-name>
+    <param-value>com.stackoverflow</param-value>
+</context-param>
+
+To get the Output from servlet file we have to use  few objects and methods :
+
+{
+PrintWriter out = response.getWriter();
+out.println("Hi"); // this two lines are just for printing Hi
+
+ServletContext ctx = getServletContext();
+String str = ctx.getInitParameter("name");
+out.printlnln(str);
+}
+
+---------------------------------------------------------------------------------------------------------------------------
+Servlet Annotations Configuration
+-----------------------------------------------------------------------------------------------------------------------------
+The javax.servlet.annotation package contains a number of annotations that allow users to use annotations to declare servlets, filters, listeners and specify the metadata for the declared component.
+@WebServlet("/hello") declares the servlet and maps it to the URL pattern "/hello".
+There's no need for a separate web.xml file.
+
+@WebFilter	Annotation used to declare a servlet filter.
+@WebInitParam	This annotation is used on a Servlet or Filter implementation class to specify an initialization parameter.
+@WebListener	This annotation is used to declare a WebListener.
+@WebServlet	Annotation used to declare a servlet.

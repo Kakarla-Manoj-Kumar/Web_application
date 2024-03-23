@@ -1,0 +1,149 @@
+JSP Converted into Servlet
+-----------------------------------
+-->We can't Run Jsp we can only write code
+-->Tomcat runs on Servlet because Tomcat is also an Servlet Container
+-->In Tomcat we can run only Servlet , not jsp
+-->jsp not need to create out object because servlet will provide for jsp
+-->Jsp not need to create Request and Response objects because servlet will provide us.
+-->Those objects are called as implicit object in jsp.
+--> Intension for creating and just showing data on page jsp is better
+--> Intension is to just process it means for that Servlet 
+
+-Procedure for creating JSP file
+-----------------------------------------
+->create a jsp file
+->make sure to check we are writing the code Under the Html body tag
+ 
+
+<html>
+<body>
+<%
+int i = Integer.ParseInt(request.getParameter("v1"));
+int j = Integer.ParseInt(request.getParameter("v2"));
+int k=i+j;
+out.println(k);
+%>
+</body>
+</html>
+
+Tags of Jsp
+----------------
+Scriptlet<%     %> --->whatever we write in this tag it will goto Servlet Service method.
+
+Declaration<%!   %>--->(Inside Class OutSide Service Method) whatever we write in this tag it will goto Servlet Declaration Section.and also whatever we want inside the class out side the service method it will be used like extra methods to be add for class.
+
+
+Directive<%@     %> --->Outside the class inside the package.for example to import packages.
+ 
+Expression<%=   %> ---->whatever we write in this tag it will goto Out.println();
+
+
+
+Procedure for Creating Servlet
+---------------------------------------
+->Open Eclipse
+->Create Class
+->Download Tomcat Server Zip file and Extract it
+->Add the File to Eclipse in Server window.
+->extend the class with HttpServlet
+->import Package
+->create Method of Servlet (doget/dopost)
+->have to pass two parameters request and response
+->create object of PrintWriter
+
+
+Jsp Directive
+------------------
+@page
+@include
+@taglib
+
+
+
+@page
+---------
+The @page directive in JSP is used to define page-specific attributes and directives.
+
+<%@ page attribute="value" attribute="value"...%>
+
+language ="scripting language" but jsp is default as java
+extends = "className"
+import = "java.util.*, java.sql.Statement"
+session = "true|false"
+autoflush = "true|false"
+contentType = "text/html"
+errorPage = "error_url"
+isErrorPage = "true|false"
+info = "information"
+isELIgn ored = "true|false"
+isThreadSafe = "true|false"
+
+
+
+
+@Include
+--------------
+The @include directive in JSP is used to include the content of another resource (such as another JSP page, HTML file, or text file) into the current JSP page 
+ 
+<%@ file ="filename"%>
+
+
+
+
+@Taglib
+------------
+ the @taglib directive is used to define a custom tag library in a JSP page.
+
+<%@ taglib uri="uri" prefix="fx" %>
+
+
+
+Implicit Object in Jsp
+-----------------------------
+7 - Builtin Object(Can be used in Scriptlet and expresion)
+
+request  (HttpServletRequest)
+response (HttpServletResponse)
+pageContext (PageContext)
+out    (JspWriter) - PrintWriter
+session (HttpSession)
+application (ServletContext)
+Config  (servletConfig)
+
+
+Exception Handling in Jsp
+-----------------------------------
+First.jsp file
+---------------
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1" errorPage="error.jsp"%>
+<!DOCTYPE html>
+<html>
+<body>
+<% 
+    out.println(7/0);     
+%> 
+</body>
+</html>  
+
+error.jsp file
+------------------
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1" isErrorPage ="true"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body bgcolor="red">
+
+ Error
+ <%=exception.getMessage() %>
+  
+</body>
+</html>
+
+
+MVC(Model View Controller)
+JSTL(JavaServerPages Standard Tah Library)

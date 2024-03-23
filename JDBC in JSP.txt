@@ -1,0 +1,70 @@
+JDBC in JSP
+-----------------
+--> import the package
+<%@page import="java.sql.*"  %>
+
+
+-->Load and Rigiter the Driver
+
+For PostGres :
+
+Driver : Org.postgresql.Driver
+Url : jdbc:postgresql://localhost:5432/schema
+
+For Mysql :
+
+Driver : com.mysql.cj.jdbc.Driver
+Url : jdbc:mysql://localhost:3306/schema
+
+-->create Statement
+-->execute Statements and get result to ResultSet
+
+
+
+
+Program
+-------------
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@page import="java.sql.*"  %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<% 
+ Class.forName("com.mysql.cj.jdbc.Driver");
+ Connection con =DriverManager.getConnection("jdbc:mysql://localhost:3306/sys","root","Kakarla$08012001");
+ Statement st = con.createStatement();
+ String query ="select * from employee";
+ 
+ ResultSet rs = st.executeQuery(query);
+ 
+ rs.next();
+
+%>
+
+Student Id : <%= rs.getInt(1) %><br>
+Student Name : <%= rs.getString(2) %><br>
+Student Date of Birth : <%= rs.getDate(3) %><br>
+Student Email : <%= rs.getString(4) %>
+
+</body>
+</html>
+
+
+Fetched Values
+-----------------------
+
+ Student Id : 22
+ Student Name : Manu
+ Student Date of Birth : 2012-09-06
+ Student Email : manu@123 
+
+
+
+
