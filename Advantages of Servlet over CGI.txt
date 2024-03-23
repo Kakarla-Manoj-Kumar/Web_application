@@ -1,0 +1,20 @@
+Advantages of Servlet over CGI(Common Gate Interface)
+---------------------------------------------------------------------------
+
+Disadvantages of CGI:
+------------------------------
+
+There are many problems in CGI technology:
+
+1).If the number of clients increases, it takes more time for sending the response.
+2).For each request, it starts a process, and the web server is limited to start processes.
+3).It uses platform dependent language e.g. C, C++, perl.
+
+
+Advantages of Servlet:
+-----------------------------
+ 
+1).Better performance: because it creates a thread for each request, not process.
+2).Portability: because it uses Java language.
+3).Robust: JVM manages Servlets, so we don't need to worry about the memory leak, garbage collection, etc.
+4).Secure: because it uses java language.
